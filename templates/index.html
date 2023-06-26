@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Github User Search</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body>
+    <form action="/usersearch" method="post">
+        <div class="input-container">
+          <h1>Github User Search</h1>
+          <label for="username" class="text">Username:</label>
+          <input class="custom-input" type="text" id="username" name="username" value="{{ username }}" required>
+        <div>
+        <input type="submit" value="Submit" hidden>
+    </form>
+
+    {% if error %}
+        <h2>User Not Found</h2>
+    {% elif login %}
+        <div class="user-info">
+          <div class="profile">
+            <img class="pfp" src="{{ pfp }}">
+          </div>
+          <div class="details">
+            <a href="{{ link }}" target="_blank">{{ login }}</a>
+            <p>Name: {{ name }}</p>
+            <p>Public Repositories: {{ public_repos }}</p>
+            <p>Followers: {{ followers }}</p>
+            <p>Following: {{ following }}</p>
+            {% if country %}
+              <p>Country: {{ country }}</p>
+            {% endif %}
+            {% if twitter_username %}
+                <p>Twitter: <a href="https://twitter.com/{{ twitter_username }}" target="_blank">{{ twitter_username }}</a></p>
+            {% endif %}
+            {% if blog %}
+                <p>Blog: <a href="{{ blog }}" target="_blank">{{ blog }}</a></p>
+            {% endif %}
+            {% if company %}
+                <p>Company: {{ company }}</p>
+            {% endif %}
+          </div>
+        </div>
+      
+    {% endif %}
+</body>
+</html>
