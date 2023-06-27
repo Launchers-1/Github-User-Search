@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # Replace <your_access_token> with your actual personal access token
-access_token = os.environ['GithubApiCode']
+access_token = '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'
 github = Github(access_token)
 
 
@@ -20,8 +20,12 @@ def usersearch():
   try:
     user = github.get_user(username)
     user_data = user.raw_data
-
+    name = user_data.get('name', '')
     pfp = user_data['avatar_url']
+    public_repos = user_data['public_repos']
+    following = user_data.get('following', '')
+    followers = user_data.get('followers', '')
+    location = user_data.get('location', '')
     login = "@" + user_data['login']
     link = user_data['html_url']
     twitter_username = user_data.get('twitter_username', '')
@@ -38,7 +42,7 @@ def usersearch():
                            twitter_username=twitter_username,
                            blog=blog,
                            company=company,
-                           country=country,
+                           location=location,
                            pfp=pfp,
                            link=link)  #
   except Exception as e:
@@ -50,4 +54,4 @@ def usersearch():
 
 
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=81)
+  app.run()
