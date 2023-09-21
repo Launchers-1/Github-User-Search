@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # Replace <your_access_token> with your actual personal access token
-access_token = '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'
+access_token = <your_access_token>
 github = Github(access_token)
 
 
